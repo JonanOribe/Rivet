@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: paperclip_password
       POSTGRES_DB: lingua_db
     ports:
-      - "5432:5432"
+      - "5433:5432"   # <-- Cambiado de 5432:5432 a 5433:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -22,7 +22,7 @@ services:
     container_name: paperclip_orchestrator
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgresql://paperclip:paperclip_password@postgres:5432/lingua_db
+      - DATABASE_URL=postgresql://paperclip:paperclip_password@postgres:5432/lingua_db # Paperclip habla con postgres por la red interna de docker en el puerto 5432
       - OLLAMA_HOST=http://host.docker.internal:11434
       - PORT=3000
       - SERVE_UI=true
