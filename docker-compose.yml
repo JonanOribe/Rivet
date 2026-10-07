@@ -22,11 +22,12 @@ services:
     container_name: paperclip_orchestrator
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgresql://paperclip:paperclip_password@postgres:5432/lingua_db # Paperclip habla con postgres por la red interna de docker en el puerto 5432
+      - DATABASE_URL=postgresql://paperclip:paperclip_password@postgres:5432/lingua_db
       - OLLAMA_HOST=http://host.docker.internal:11434
       - PORT=3000
       - SERVE_UI=true
-      - PAPERCLIP_DEPLOYMENT_MODE=development
+      - PAPERCLIP_DEPLOYMENT_MODE=authenticated
+      - PAPERCLIP_SERVER_BIND=lan
       - BETTER_AUTH_SECRET=8cab117f53a4b69f9159ace54d257f57cb736dac9b6c754878f2a0218bff119d
     ports:
       - "3000:3000"
